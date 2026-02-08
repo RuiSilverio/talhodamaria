@@ -58,15 +58,19 @@
       border-top: 1px solid rgba(0,0,0,.15);
     }
     nav ul{
-      list-style:none;
-      display:flex;
-      justify-content:center;
-      gap:22px;
-      padding: 16px 10px; /* ✅ aumenta altura da barra */
-      margin:0;
-      flex-wrap:wrap;
-      align-items:center;
-    }
+  list-style:none;
+  display:flex;
+  justify-content:center;
+  gap:22px;
+
+  min-height: 80px;     /* ← muda este valor se quiseres mais */
+  padding: 0 20px;      /* padding vertical passa a vir da altura */
+
+  margin:0;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
     nav a{
       color:#fff;
       text-decoration:none;
