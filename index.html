@@ -6,17 +6,11 @@
   <title>Talho da Maria</title>
 
   <style>
-    /* ==========
-      EDITAR AQUI (CORES / TIPOS)
-    ========== */
     :root{
-      --header-bg: #efe7d8;     /* EDITAR AQUI: cor de fundo do cabeçalho */
-      --brand-red: #7b0000;     /* EDITAR AQUI: tom vermelho do site */
-      --dark: #111;
-      --wood: #5a3b22;
+      --header-bg: #efe7d8;
+      --brand-red: #7b0000;
       --text: #ffffff;
       --muted: rgba(255,255,255,.8);
-      --card-bg: #0f0f0f;
       --maxw: 980px;
     }
 
@@ -42,23 +36,23 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:30px;
-      padding: 18px 30px 10px;
+      gap:14px;
+      padding: 14px 14px 12px;
     }
+
+    /* ✅ Logo 200x160 + sem borda */
     .logo{
-      width:200px;px;height:160px;
-      border-radius:12px;
+      width:200px;
+      height:160px;
       object-fit:contain;
-      border:1px solid rgba(0,0,0,.15);
-      padding:6px;
+      background: transparent;
+      border: none;     /* ✅ tira borda */
+      padding: 0;       /* ✅ tira espaço que parecia moldura */
+      border-radius: 0; /* ✅ sem cantos arredondados */
+      display:block;
     }
-    .brand{
-      text-align:left;
-      line-height:1.05;
-      font-family: Georgia, "Times New Roman", serif;
-    }
-    .brand .top{font-size:18px; font-weight:700; letter-spacing:.2px;}
-    .brand .main{font-size:44px; font-weight:900;}
+
+    /* ✅ MENU mais alto */
     nav{
       background: #2a0000;
       border-top: 1px solid rgba(0,0,0,.15);
@@ -68,38 +62,32 @@
       display:flex;
       justify-content:center;
       gap:22px;
-      padding:8px 10px;
+      padding: 16px 10px; /* ✅ aumenta altura da barra */
       margin:0;
       flex-wrap:wrap;
+      align-items:center;
     }
     nav a{
       color:#fff;
       text-decoration:none;
-      font-size:13px;
-      padding:6px 10px;
+      font-size:14px;
+      padding:10px 14px; /* ✅ botões mais “altos” */
       border-radius:999px;
       opacity:.95;
+      line-height:1;
     }
     nav a:hover{background:rgba(255,255,255,.12)}
 
     /* ===== HERO / CARROSSEL FULL WIDTH ===== */
-    .hero{
-      padding: 0;
-      background: transparent; /* vermelho saiu daqui */
-    }
+    .hero{padding: 0; background: transparent;}
 
     .carousel{
       position:relative;
-
-      width: 100vw;                 /* lado a lado */
-      margin-left: calc(50% - 50vw);/* garante full width mesmo com wrap */
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
       border-top: 4px solid rgba(255,255,255,.10);
       border-bottom: 4px solid rgba(255,255,255,.10);
-      border-left: none;
-      border-right: none;
-      border-radius: 0;
-
-      height: 600px;                /* ✅ EDITAR AQUI: altura do carrossel (600px) */
+      height: 600px; /* ✅ carrossel 600px */
       background:#000;
       overflow:hidden;
     }
@@ -154,7 +142,6 @@
     }
     .btn:hover{background:rgba(255,255,255,.12)}
 
-    /* Controls */
     .controls{
       position:absolute;
       right: 18px;
@@ -191,7 +178,7 @@
     }
     .dot.active{background:#fff}
 
-    /* ===== Produtos (FUNDO VERMELHO AQUI) ===== */
+    /* ===== Produtos (fundo vermelho aqui) ===== */
     .cats{
       padding: 18px 0 28px;
       background:
@@ -258,73 +245,32 @@
     }
     .btn-small:hover{background:rgba(255,255,255,.12)}
 
-    /* ===== About ===== */
-    .about{
-      padding: 18px 0 28px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02)),
-        repeating-linear-gradient(90deg, rgba(90,59,34,.45) 0 10px, rgba(90,59,34,.35) 10px 20px);
-      border-top: 3px solid rgba(255,255,255,.08);
-    }
-    .about h2{
-      margin:0 0 12px;
-      text-align:center;
-      font-family: Georgia, "Times New Roman", serif;
-      letter-spacing:.3px;
-      text-shadow: 0 2px 10px rgba(0,0,0,.4);
-    }
-    .about-card{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      border-radius: 10px;
-      overflow:hidden;
-      border: 3px solid rgba(123,0,0,.7);
-      background: rgba(0,0,0,.55);
-    }
-    .about-left{min-height: 170px; background:#000;}
-    .about-left img{width:100%; height:100%; object-fit:cover;}
-    .about-right{
-      padding: 14px 16px;
-      background: linear-gradient(135deg, rgba(123,0,0,.95), rgba(90,0,0,.65));
-    }
-    .about-right h3{margin:0 0 8px; font-size:14px;}
-    .about-right p{margin:0 0 10px; font-size:12.5px; color: rgba(255,255,255,.9); line-height:1.35}
-    .sig{opacity:.9; font-size:12px; margin-top:10px}
-
-    /* ===== Responsive ===== */
+    /* Responsive */
     @media (max-width: 880px){
       .cats-grid{grid-template-columns: repeat(2, 1fr);}
       .carousel{height: 380px;}
       .overlay h1{font-size:26px}
+      .logo{width:180px;height:140px;}
+      nav ul{padding:14px 10px;}
     }
     @media (max-width: 520px){
-      .brand .main{font-size:34px}
-      .overlay h1{font-size:22px}
       .cats-grid{grid-template-columns: 1fr;}
-      .about-card{grid-template-columns: 1fr;}
       .carousel{height: 280px;}
+      .overlay h1{font-size:22px}
+      .logo{width:160px;height:120px;}
+      nav a{padding:10px 12px;}
     }
   </style>
 </head>
 
 <body>
 
-  <!-- =========================
-    EDITAR AQUI (LOGO + NOME)
-    - Troca o src do logo para o teu ficheiro, ex: assets/logo.png
-  ========================= -->
   <header>
     <div class="wrap header-inner">
+      <!-- ✅ EDITAR AQUI: ficheiro do logo -->
       <img class="logo" src="logot-240-x-200.png" alt="Logo do Talho">
-      <div class="brand">
-        <div class="top">Talho da</div>
-        <div class="main">Maria</div>
-      </div>
     </div>
 
-    <!-- =========================
-      EDITAR AQUI (MENU)
-    ========================= -->
     <nav>
       <ul class="wrap">
         <li><a href="#inicio">Início</a></li>
@@ -336,16 +282,12 @@
     </nav>
   </header>
 
-  <!-- HERO / CARROSSEL FULL WIDTH -->
   <section id="inicio" class="hero">
-
     <div class="carousel" aria-label="Carrossel de destaque">
 
-      <!-- =========================
-        EDITAR AQUI (SLIDES DO CARROSSEL)
-        - Troca as imagens (src)
-        - Adiciona mais slides copiando um bloco .slide
-      ========================= -->
+      <!-- ✅ EDITAR AQUI (SLIDES)
+           Primeira imagem: carnefaca.png
+      -->
       <div class="slide active">
         <img src="carnefaca.png" alt="Imagem destaque 1">
       </div>
@@ -359,9 +301,7 @@
         <img src="PLACEHOLDER-SLIDE-4.jpg" alt="Imagem destaque 4">
       </div>
 
-      <!-- =========================
-        EDITAR AQUI (TEXTO + BOTÃO POR CIMA)
-      ========================= -->
+      <!-- EDITAR AQUI (TEXTO + BOTÃO) -->
       <div class="overlay">
         <div class="overlay-content">
           <h1>CARNE DE QUALIDADE,<br> SABOR TRADICIONAL.</h1>
@@ -370,24 +310,18 @@
         </div>
       </div>
 
-      <!-- Controles -->
       <div class="controls">
         <button class="icon-btn" id="prevBtn" aria-label="Anterior">‹</button>
         <button class="icon-btn" id="nextBtn" aria-label="Seguinte">›</button>
       </div>
       <div class="dots" id="dots" aria-label="Indicadores do carrossel"></div>
-
     </div>
   </section>
 
-  <!-- PRODUTOS (FUNDO VERMELHO AQUI) -->
   <section id="produtos" class="cats">
     <div class="wrap">
       <div class="cats-grid">
 
-        <!-- =========================
-          EDITAR AQUI (CARD 1)
-        ========================= -->
         <article class="cat-card">
           <div class="cat-top">
             <div class="badge">🐮</div>
@@ -401,7 +335,6 @@
           </div>
         </article>
 
-        <!-- EDITAR AQUI (CARD 2) -->
         <article class="cat-card">
           <div class="cat-top">
             <div class="badge">🐷</div>
@@ -415,7 +348,6 @@
           </div>
         </article>
 
-        <!-- EDITAR AQUI (CARD 3) -->
         <article class="cat-card">
           <div class="cat-top">
             <div class="badge">🐔</div>
@@ -429,7 +361,6 @@
           </div>
         </article>
 
-        <!-- EDITAR AQUI (CARD 4) -->
         <article class="cat-card">
           <div class="cat-top">
             <div class="badge">🌭</div>
@@ -447,18 +378,13 @@
     </div>
   </section>
 
-  <!-- SOBRE NÓS -->
   <section id="sobre" class="about">
     <div class="wrap">
       <h2>Sobre Nós</h2>
-
       <div class="about-card">
-        <!-- EDITAR AQUI: imagem Sobre -->
         <div class="about-left">
           <img src="PLACEHOLDER-SOBRE.jpg" alt="Sobre nós">
         </div>
-
-        <!-- EDITAR AQUI: texto Sobre -->
         <div class="about-right">
           <h3>Talho da Maria:</h3>
           <p>
@@ -471,7 +397,6 @@
     </div>
   </section>
 
-  <!-- (Opcional) Âncoras exemplo -->
   <div id="bovino"></div>
   <div id="suino"></div>
   <div id="aves"></div>
@@ -480,17 +405,14 @@
   <div id="contacto"></div>
 
   <script>
-    /* =========================
-      CARROSSEL (JS)
-      - Troca automática a cada 5 segundos ✅
-    ========================= */
+    /* Carrossel: troca automática a cada 5 segundos */
     const slides = Array.from(document.querySelectorAll('.slide'));
     const dotsWrap = document.getElementById('dots');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
 
     let idx = 0;
-    const autoMs = 5000; // ✅ 5 segundos
+    const autoMs = 5000;
     let timer = null;
 
     function renderDots(){
@@ -519,27 +441,17 @@
     function next(userAction=false){ goTo(idx + 1, userAction); }
     function prev(userAction=false){ goTo(idx - 1, userAction); }
 
-    function start(){
-      timer = setInterval(() => next(false), autoMs);
-    }
-    function stop(){
-      if(timer) clearInterval(timer);
-      timer = null;
-    }
-    function restart(){
-      stop();
-      start();
-    }
+    function start(){ timer = setInterval(() => next(false), autoMs); }
+    function stop(){ if(timer) clearInterval(timer); timer = null; }
+    function restart(){ stop(); start(); }
 
     prevBtn.addEventListener('click', () => prev(true));
     nextBtn.addEventListener('click', () => next(true));
 
-    // Iniciar
     renderDots();
     show();
     start();
 
-    // Pausa ao passar o rato em cima
     const carousel = document.querySelector('.carousel');
     carousel.addEventListener('mouseenter', stop);
     carousel.addEventListener('mouseleave', start);
