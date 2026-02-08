@@ -25,12 +25,12 @@
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background:
-        radial-gradient(1200px 700px at 50% -200px, rgba(123,0,0,.35), transparent 60%),
-        linear-gradient(180deg, #2b0c0c 0%, #0e0e0e 30%, #0b0b0b 100%);
+        radial-gradient(1200px 700px at 50% -200px, rgba(123,0,0,.25), transparent 60%),
+        linear-gradient(180deg, #1b0a0a 0%, #0e0e0e 30%, #0b0b0b 100%);
       color: var(--text);
     }
 
-    .wrap{max-width:var(--maxw); margin:0 auto;}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding: 0 14px;}
 
     /* ===== Header ===== */
     header{
@@ -46,19 +46,19 @@
       padding: 18px 14px 10px;
     }
     .logo{
-      width: 200px;px;height:160px;
+      width:200px;px;height:160px;
       border-radius:12px;
       object-fit:contain;
       border:1px solid rgba(0,0,0,.15);
       padding:6px;
     }
     .brand{
-      text-align:center;
+      text-align:left;
       line-height:1.05;
       font-family: Georgia, "Times New Roman", serif;
     }
-    .brand .top{font-size:18px; font-weight:600; letter-spacing:.2px;}
-    .brand .main{font-size:44px; font-weight:800;}
+    .brand .top{font-size:18px; font-weight:700; letter-spacing:.2px;}
+    .brand .main{font-size:44px; font-weight:900;}
     nav{
       background: #2a0000;
       border-top: 1px solid rgba(0,0,0,.15);
@@ -82,19 +82,28 @@
     }
     nav a:hover{background:rgba(255,255,255,.12)}
 
-    /* ===== Hero / Carousel ===== */
+    /* ===== HERO / CARROSSEL FULL WIDTH ===== */
     .hero{
-      padding: 14px 0 10px;
-      background: linear-gradient(180deg, rgba(123,0,0,.9), rgba(123,0,0,.2));
+      padding: 0;
+      background: transparent; /* vermelho saiu daqui */
     }
+
     .carousel{
       position:relative;
-      border: 4px solid rgba(255,255,255,.12);
-      border-radius: 8px;
-      overflow:hidden;
-      min-height: 270px;
+
+      width: 100vw;                 /* lado a lado */
+      margin-left: calc(50% - 50vw);/* garante full width mesmo com wrap */
+      border-top: 4px solid rgba(255,255,255,.10);
+      border-bottom: 4px solid rgba(255,255,255,.10);
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
+
+      height: 600px;                /* ✅ EDITAR AQUI: altura do carrossel (600px) */
       background:#000;
+      overflow:hidden;
     }
+
     .slide{
       position:absolute;
       inset:0;
@@ -109,36 +118,36 @@
       filter: contrast(1.02) saturate(1.02);
       transform: scale(1.02);
     }
+
     .overlay{
       position:absolute;
       inset:0;
-      background: linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.35) 55%, rgba(0,0,0,.10) 100%);
+      background: linear-gradient(90deg, rgba(0,0,0,.70) 0%, rgba(0,0,0,.30) 55%, rgba(0,0,0,.08) 100%);
       display:flex;
       align-items:center;
       padding: 18px 18px;
+      z-index:3;
     }
-    .overlay-content{
-      max-width: 420px;
-    }
+    .overlay-content{max-width: 520px;}
     .overlay h1{
       margin:0 0 10px;
-      font-size: 28px;
-      line-height:1.1;
+      font-size: 34px;
+      line-height:1.08;
       text-transform: uppercase;
       letter-spacing:.3px;
     }
     .overlay p{
       margin:0 0 14px;
       color: var(--muted);
-      font-size: 13.5px;
+      font-size: 14px;
     }
     .btn{
       display:inline-block;
       background: transparent;
       color:#fff;
       border: 1px solid rgba(255,255,255,.75);
-      padding: 8px 12px;
-      border-radius: 6px;
+      padding: 10px 14px;
+      border-radius: 7px;
       text-decoration:none;
       font-size: 12px;
       letter-spacing:.2px;
@@ -148,47 +157,53 @@
     /* Controls */
     .controls{
       position:absolute;
-      inset:auto 10px 10px auto;
+      right: 18px;
+      bottom: 18px;
       display:flex;
-      gap:8px;
+      gap:10px;
       z-index:5;
     }
     .icon-btn{
-      width:36px;height:36px;
+      width:44px;height:44px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.35);
       background:rgba(0,0,0,.35);
       color:#fff;
       cursor:pointer;
-      font-size:16px;
+      font-size:20px;
     }
     .icon-btn:hover{background:rgba(0,0,0,.55)}
+
     .dots{
       position:absolute;
       left:0; right:0;
-      bottom:10px;
+      bottom:18px;
       display:flex;
       justify-content:center;
-      gap:6px;
+      gap:7px;
       z-index:5;
-      pointer-events:auto;
     }
     .dot{
-      width:9px;height:9px;border-radius:99px;
+      width:10px;height:10px;border-radius:99px;
       background:rgba(255,255,255,.35);
       border:1px solid rgba(255,255,255,.35);
       cursor:pointer;
     }
     .dot.active{background:#fff}
 
-    /* ===== Category cards ===== */
+    /* ===== Produtos (FUNDO VERMELHO AQUI) ===== */
     .cats{
-      padding: 12px 0 18px;
+      padding: 18px 0 28px;
+      background:
+        radial-gradient(1100px 420px at 50% 0%, rgba(123,0,0,.95), rgba(123,0,0,.35) 55%, rgba(0,0,0,.55) 100%),
+        linear-gradient(180deg, rgba(123,0,0,.9), rgba(0,0,0,.65));
     }
+
     .cats-grid{
       display:grid;
       grid-template-columns: repeat(4, 1fr);
       gap:12px;
+      margin-top: 14px;
     }
     .cat-card{
       background: rgba(10,10,10,.72);
@@ -223,7 +238,7 @@
       border: 3px solid rgba(123,0,0,.85);
       border-radius: 6px;
       overflow:hidden;
-      height: 86px;
+      height: 100px;
       background:#000;
     }
     .cat-img img{width:100%; height:100%; object-fit:cover;}
@@ -261,16 +276,12 @@
     .about-card{
       display:grid;
       grid-template-columns: 1.1fr .9fr;
-      gap:0;
       border-radius: 10px;
       overflow:hidden;
       border: 3px solid rgba(123,0,0,.7);
       background: rgba(0,0,0,.55);
     }
-    .about-left{
-      min-height: 170px;
-      background:#000;
-    }
+    .about-left{min-height: 170px; background:#000;}
     .about-left img{width:100%; height:100%; object-fit:cover;}
     .about-right{
       padding: 14px 16px;
@@ -283,12 +294,15 @@
     /* ===== Responsive ===== */
     @media (max-width: 880px){
       .cats-grid{grid-template-columns: repeat(2, 1fr);}
+      .carousel{height: 380px;}
+      .overlay h1{font-size:26px}
     }
     @media (max-width: 520px){
-      .brand .main{font-size:36px}
+      .brand .main{font-size:34px}
       .overlay h1{font-size:22px}
       .cats-grid{grid-template-columns: 1fr;}
       .about-card{grid-template-columns: 1fr;}
+      .carousel{height: 280px;}
     }
   </style>
 </head>
@@ -298,7 +312,6 @@
   <!-- =========================
     EDITAR AQUI (LOGO + NOME)
     - Troca o src do logo para o teu ficheiro, ex: assets/logo.png
-    - Se não quiseres texto, podes apagar o <div class="brand">...</div>
   ========================= -->
   <header>
     <div class="wrap header-inner">
@@ -311,7 +324,6 @@
 
     <!-- =========================
       EDITAR AQUI (MENU)
-      - Muda nomes e links (#secao)
     ========================= -->
     <nav>
       <ul class="wrap">
@@ -324,60 +336,57 @@
     </nav>
   </header>
 
-  <!-- HERO / CARROSSEL (ZONA VERMELHA GRANDE) -->
+  <!-- HERO / CARROSSEL FULL WIDTH -->
   <section id="inicio" class="hero">
-    <div class="wrap">
-      <div class="carousel" aria-label="Carrossel de destaque">
 
-        <!-- =========================
-          EDITAR AQUI (SLIDES DO CARROSSEL)
-          - Adiciona + slides copiando um bloco .slide
-          - Troca as imagens (src)
-        ========================= -->
-        <div class="slide active">
-          <img src="PLACEHOLDER-SLIDE-1.jpg" alt="Imagem destaque 1">
-        </div>
-        <div class="slide">
-          <img src="PLACEHOLDER-SLIDE-2.jpg" alt="Imagem destaque 2">
-        </div>
-        <div class="slide">
-          <img src="PLACEHOLDER-SLIDE-3.jpg" alt="Imagem destaque 3">
-        </div>
-        <div class="slide">
-          <img src="PLACEHOLDER-SLIDE-4.jpg" alt="Imagem destaque 4">
-        </div>
+    <div class="carousel" aria-label="Carrossel de destaque">
 
-        <!-- =========================
-          EDITAR AQUI (TEXTO + BOTÃO POR CIMA)
-          - Este conteúdo fica por cima do carrossel
-        ========================= -->
-        <div class="overlay">
-          <div class="overlay-content">
-            <h1>CARNE DE QUALIDADE,<br> SABOR TRADICIONAL.</h1>
-            <p>Descubra o melhor da nossa seleção premium.</p>
-            <a class="btn" href="#produtos">VER PRODUTOS</a>
-          </div>
-        </div>
-
-        <!-- Controles -->
-        <div class="controls">
-          <button class="icon-btn" id="prevBtn" aria-label="Anterior">‹</button>
-          <button class="icon-btn" id="nextBtn" aria-label="Seguinte">›</button>
-        </div>
-        <div class="dots" id="dots" aria-label="Indicadores do carrossel"></div>
-
+      <!-- =========================
+        EDITAR AQUI (SLIDES DO CARROSSEL)
+        - Troca as imagens (src)
+        - Adiciona mais slides copiando um bloco .slide
+      ========================= -->
+      <div class="slide active">
+        <img src="PLACEHOLDER-SLIDE-1.jpg" alt="Imagem destaque 1">
       </div>
+      <div class="slide">
+        <img src="PLACEHOLDER-SLIDE-2.jpg" alt="Imagem destaque 2">
+      </div>
+      <div class="slide">
+        <img src="PLACEHOLDER-SLIDE-3.jpg" alt="Imagem destaque 3">
+      </div>
+      <div class="slide">
+        <img src="PLACEHOLDER-SLIDE-4.jpg" alt="Imagem destaque 4">
+      </div>
+
+      <!-- =========================
+        EDITAR AQUI (TEXTO + BOTÃO POR CIMA)
+      ========================= -->
+      <div class="overlay">
+        <div class="overlay-content">
+          <h1>CARNE DE QUALIDADE,<br> SABOR TRADICIONAL.</h1>
+          <p>Descubra o melhor da nossa seleção premium.</p>
+          <a class="btn" href="#produtos">VER PRODUTOS</a>
+        </div>
+      </div>
+
+      <!-- Controles -->
+      <div class="controls">
+        <button class="icon-btn" id="prevBtn" aria-label="Anterior">‹</button>
+        <button class="icon-btn" id="nextBtn" aria-label="Seguinte">›</button>
+      </div>
+      <div class="dots" id="dots" aria-label="Indicadores do carrossel"></div>
+
     </div>
   </section>
 
-  <!-- CARDS (ZONA VERMELHA DOS 4 QUADRADOS) -->
+  <!-- PRODUTOS (FUNDO VERMELHO AQUI) -->
   <section id="produtos" class="cats">
     <div class="wrap">
       <div class="cats-grid">
 
         <!-- =========================
           EDITAR AQUI (CARD 1)
-          - Ícone (emoji) / título / imagem / link do botão
         ========================= -->
         <article class="cat-card">
           <div class="cat-top">
@@ -438,18 +447,18 @@
     </div>
   </section>
 
-  <!-- SOBRE NÓS (também editável) -->
+  <!-- SOBRE NÓS -->
   <section id="sobre" class="about">
     <div class="wrap">
       <h2>Sobre Nós</h2>
 
       <div class="about-card">
-        <!-- EDITAR AQUI: imagem da secção Sobre -->
+        <!-- EDITAR AQUI: imagem Sobre -->
         <div class="about-left">
           <img src="PLACEHOLDER-SOBRE.jpg" alt="Sobre nós">
         </div>
 
-        <!-- EDITAR AQUI: texto da secção Sobre -->
+        <!-- EDITAR AQUI: texto Sobre -->
         <div class="about-right">
           <h3>Talho da Maria:</h3>
           <p>
@@ -473,8 +482,7 @@
   <script>
     /* =========================
       CARROSSEL (JS)
-      - Editar tempo em autoMs
-      - Se adicionares/removeres slides, funciona automaticamente
+      - Troca automática a cada 5 segundos ✅
     ========================= */
     const slides = Array.from(document.querySelectorAll('.slide'));
     const dotsWrap = document.getElementById('dots');
@@ -482,7 +490,7 @@
     const nextBtn = document.getElementById('nextBtn');
 
     let idx = 0;
-    const autoMs = 5000; // EDITAR AQUI: tempo entre slides (ms)
+    const autoMs = 5000; // ✅ 5 segundos
     let timer = null;
 
     function renderDots(){
@@ -531,7 +539,7 @@
     show();
     start();
 
-    // Pausa quando o utilizador passa o rato por cima
+    // Pausa ao passar o rato em cima
     const carousel = document.querySelector('.carousel');
     carousel.addEventListener('mouseenter', stop);
     carousel.addEventListener('mouseleave', start);
