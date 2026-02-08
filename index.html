@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Talho da Maria</title>
+
+  <style>
+    /* ==========
+      EDITAR AQUI (CORES / TIPOS)
+    ========== */
+    :root{
+      --header-bg: #efe7d8;     /* EDITAR AQUI: cor de fundo do cabeçalho */
+      --brand-red: #7b0000;     /* EDITAR AQUI: tom vermelho do site */
+      --dark: #111;
+      --wood: #5a3b22;
+      --text: #ffffff;
+      --muted: rgba(255,255,255,.8);
+      --card-bg: #0f0f0f;
+      --maxw: 980px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 700px at 50% -200px, rgba(123,0,0,.35), transparent 60%),
+        linear-gradient(180deg, #2b0c0c 0%, #0e0e0e 30%, #0b0b0b 100%);
+      color: var(--text);
+    }
+
+    .wrap{max-width:var(--maxw); margin:0 auto;}
+
+    /* ===== Header ===== */
+    header{
+      background: var(--header-bg);
+      color:#111;
+      border-bottom: 3px solid #3a0b0b;
+    }
+    .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      padding: 18px 14px 10px;
+    }
+    .logo{
+      width:56px;height:56px;
+      border-radius:12px;
+      object-fit:contain;
+      background:#fff;
+      border:1px solid rgba(0,0,0,.15);
+      padding:6px;
+    }
+    .brand{
+      text-align:center;
+      line-height:1.05;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+    .brand .top{font-size:18px; font-weight:600; letter-spacing:.2px;}
+    .brand .main{font-size:44px; font-weight:800;}
+    nav{
+      background: #2a0000;
+      border-top: 1px solid rgba(0,0,0,.15);
+    }
+    nav ul{
+      list-style:none;
+      display:flex;
+      justify-content:center;
+      gap:22px;
+      padding:8px 10px;
+      margin:0;
+      flex-wrap:wrap;
+    }
+    nav a{
+      color:#fff;
+      text-decoration:none;
+      font-size:13px;
+      padding:6px 10px;
+      border-radius:999px;
+      opacity:.95;
+    }
+    nav a:hover{background:rgba(255,255,255,.12)}
+
+    /* ===== Hero / Carousel ===== */
+    .hero{
+      padding: 14px 0 10px;
+      background: linear-gradient(180deg, rgba(123,0,0,.9), rgba(123,0,0,.2));
+    }
+    .carousel{
+      position:relative;
+      border: 4px solid rgba(255,255,255,.12);
+      border-radius: 8px;
+      overflow:hidden;
+      min-height: 270px;
+      background:#000;
+    }
+    .slide{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      transition: opacity 700ms ease;
+    }
+    .slide.active{opacity:1}
+    .slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter: contrast(1.02) saturate(1.02);
+      transform: scale(1.02);
+    }
+    .overlay{
+      position:absolute;
+      inset:0;
+      background: linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.35) 55%, rgba(0,0,0,.10) 100%);
+      display:flex;
+      align-items:center;
+      padding: 18px 18px;
+    }
+    .overlay-content{
+      max-width: 420px;
+    }
+    .overlay h1{
+      margin:0 0 10px;
+      font-size: 28px;
+      line-height:1.1;
+      text-transform: uppercase;
+      letter-spacing:.3px;
+    }
+    .overlay p{
+      margin:0 0 14px;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+    .btn{
+      display:inline-block;
+      background: transparent;
+      color:#fff;
+      border: 1px solid rgba(255,255,255,.75);
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-decoration:none;
+      font-size: 12px;
+      letter-spacing:.2px;
+    }
+    .btn:hover{background:rgba(255,255,255,.12)}
+
+    /* Controls */
+    .controls{
+      position:absolute;
+      inset:auto 10px 10px auto;
+      display:flex;
+      gap:8px;
+      z-index:5;
+    }
+    .icon-btn{
+      width:36px;height:36px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.35);
+      background:rgba(0,0,0,.35);
+      color:#fff;
+      cursor:pointer;
+      font-size:16px;
+    }
+    .icon-btn:hover{background:rgba(0,0,0,.55)}
+    .dots{
+      position:absolute;
+      left:0; right:0;
+      bottom:10px;
+      display:flex;
+      justify-content:center;
+      gap:6px;
+      z-index:5;
+      pointer-events:auto;
+    }
+    .dot{
+      width:9px;height:9px;border-radius:99px;
+      background:rgba(255,255,255,.35);
+      border:1px solid rgba(255,255,255,.35);
+      cursor:pointer;
+    }
+    .dot.active{background:#fff}
+
+    /* ===== Category cards ===== */
+    .cats{
+      padding: 12px 0 18px;
+    }
+    .cats-grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:12px;
+    }
+    .cat-card{
+      background: rgba(10,10,10,.72);
+      border: 2px solid rgba(255,255,255,.18);
+      border-radius: 10px;
+      overflow:hidden;
+      box-shadow: 0 10px 22px rgba(0,0,0,.35);
+    }
+    .cat-top{
+      display:flex;
+      justify-content:center;
+      padding: 10px 10px 0;
+      gap:8px;
+      align-items:center;
+    }
+    .badge{
+      width:30px;height:30px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.25);
+      display:grid;
+      place-items:center;
+      font-size:16px;
+      background:rgba(0,0,0,.25);
+    }
+    .cat-title{
+      font-weight:700;
+      font-size:14px;
+      letter-spacing:.2px;
+    }
+    .cat-img{
+      margin: 10px 10px 8px;
+      border: 3px solid rgba(123,0,0,.85);
+      border-radius: 6px;
+      overflow:hidden;
+      height: 86px;
+      background:#000;
+    }
+    .cat-img img{width:100%; height:100%; object-fit:cover;}
+    .cat-actions{
+      padding: 0 10px 12px;
+      display:flex;
+      justify-content:center;
+    }
+    .btn-small{
+      font-size: 11px;
+      padding: 7px 10px;
+      border-radius: 6px;
+      border:1px solid rgba(255,255,255,.65);
+      color:#fff;
+      text-decoration:none;
+      background: rgba(0,0,0,.25);
+    }
+    .btn-small:hover{background:rgba(255,255,255,.12)}
+
+    /* ===== About ===== */
+    .about{
+      padding: 18px 0 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02)),
+        repeating-linear-gradient(90deg, rgba(90,59,34,.45) 0 10px, rgba(90,59,34,.35) 10px 20px);
+      border-top: 3px solid rgba(255,255,255,.08);
+    }
+    .about h2{
+      margin:0 0 12px;
+      text-align:center;
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing:.3px;
+      text-shadow: 0 2px 10px rgba(0,0,0,.4);
+    }
+    .about-card{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:0;
+      border-radius: 10px;
+      overflow:hidden;
+      border: 3px solid rgba(123,0,0,.7);
+      background: rgba(0,0,0,.55);
+    }
+    .about-left{
+      min-height: 170px;
+      background:#000;
+    }
+    .about-left img{width:100%; height:100%; object-fit:cover;}
+    .about-right{
+      padding: 14px 16px;
+      background: linear-gradient(135deg, rgba(123,0,0,.95), rgba(90,0,0,.65));
+    }
+    .about-right h3{margin:0 0 8px; font-size:14px;}
+    .about-right p{margin:0 0 10px; font-size:12.5px; color: rgba(255,255,255,.9); line-height:1.35}
+    .sig{opacity:.9; font-size:12px; margin-top:10px}
+
+    /* ===== Responsive ===== */
+    @media (max-width: 880px){
+      .cats-grid{grid-template-columns: repeat(2, 1fr);}
+    }
+    @media (max-width: 520px){
+      .brand .main{font-size:36px}
+      .overlay h1{font-size:22px}
+      .cats-grid{grid-template-columns: 1fr;}
+      .about-card{grid-template-columns: 1fr;}
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+    EDITAR AQUI (LOGO + NOME)
+    - Troca o src do logo para o teu ficheiro, ex: assets/logo.png
+    - Se não quiseres texto, podes apagar o <div class="brand">...</div>
+  ========================= -->
+  <header>
+    <div class="wrap header-inner">
+      <img class="logo" src="PLACEHOLDER-LOGO.png" alt="Logo do Talho">
+      <div class="brand">
+        <div class="top">Talho da</div>
+        <div class="main">Maria</div>
+      </div>
+    </div>
+
+    <!-- =========================
+      EDITAR AQUI (MENU)
+      - Muda nomes e links (#secao)
+    ========================= -->
+    <nav>
+      <ul class="wrap">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#sobre">Sobre Nós</a></li>
+        <li><a href="#receitas">Receitas</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO / CARROSSEL (ZONA VERMELHA GRANDE) -->
+  <section id="inicio" class="hero">
+    <div class="wrap">
+      <div class="carousel" aria-label="Carrossel de destaque">
+
+        <!-- =========================
+          EDITAR AQUI (SLIDES DO CARROSSEL)
+          - Adiciona + slides copiando um bloco .slide
+          - Troca as imagens (src)
+        ========================= -->
+        <div class="slide active">
+          <img src="PLACEHOLDER-SLIDE-1.jpg" alt="Imagem destaque 1">
+        </div>
+        <div class="slide">
+          <img src="PLACEHOLDER-SLIDE-2.jpg" alt="Imagem destaque 2">
+        </div>
+        <div class="slide">
+          <img src="PLACEHOLDER-SLIDE-3.jpg" alt="Imagem destaque 3">
+        </div>
+        <div class="slide">
+          <img src="PLACEHOLDER-SLIDE-4.jpg" alt="Imagem destaque 4">
+        </div>
+
+        <!-- =========================
+          EDITAR AQUI (TEXTO + BOTÃO POR CIMA)
+          - Este conteúdo fica por cima do carrossel
+        ========================= -->
+        <div class="overlay">
+          <div class="overlay-content">
+            <h1>CARNE DE QUALIDADE,<br> SABOR TRADICIONAL.</h1>
+            <p>Descubra o melhor da nossa seleção premium.</p>
+            <a class="btn" href="#produtos">VER PRODUTOS</a>
+          </div>
+        </div>
+
+        <!-- Controles -->
+        <div class="controls">
+          <button class="icon-btn" id="prevBtn" aria-label="Anterior">‹</button>
+          <button class="icon-btn" id="nextBtn" aria-label="Seguinte">›</button>
+        </div>
+        <div class="dots" id="dots" aria-label="Indicadores do carrossel"></div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CARDS (ZONA VERMELHA DOS 4 QUADRADOS) -->
+  <section id="produtos" class="cats">
+    <div class="wrap">
+      <div class="cats-grid">
+
+        <!-- =========================
+          EDITAR AQUI (CARD 1)
+          - Ícone (emoji) / título / imagem / link do botão
+        ========================= -->
+        <article class="cat-card">
+          <div class="cat-top">
+            <div class="badge">🐮</div>
+            <div class="cat-title">Bovino</div>
+          </div>
+          <div class="cat-img">
+            <img src="PLACEHOLDER-BOVINO.jpg" alt="Bovino">
+          </div>
+          <div class="cat-actions">
+            <a class="btn-small" href="#bovino">VER BOVINO</a>
+          </div>
+        </article>
+
+        <!-- EDITAR AQUI (CARD 2) -->
+        <article class="cat-card">
+          <div class="cat-top">
+            <div class="badge">🐷</div>
+            <div class="cat-title">Suíno</div>
+          </div>
+          <div class="cat-img">
+            <img src="PLACEHOLDER-SUINO.jpg" alt="Suíno">
+          </div>
+          <div class="cat-actions">
+            <a class="btn-small" href="#suino">VER SUÍNO</a>
+          </div>
+        </article>
+
+        <!-- EDITAR AQUI (CARD 3) -->
+        <article class="cat-card">
+          <div class="cat-top">
+            <div class="badge">🐔</div>
+            <div class="cat-title">Aves</div>
+          </div>
+          <div class="cat-img">
+            <img src="PLACEHOLDER-AVES.jpg" alt="Aves">
+          </div>
+          <div class="cat-actions">
+            <a class="btn-small" href="#aves">VER AVES</a>
+          </div>
+        </article>
+
+        <!-- EDITAR AQUI (CARD 4) -->
+        <article class="cat-card">
+          <div class="cat-top">
+            <div class="badge">🌭</div>
+            <div class="cat-title">Especiais</div>
+          </div>
+          <div class="cat-img">
+            <img src="PLACEHOLDER-ESPECIAIS.jpg" alt="Especiais">
+          </div>
+          <div class="cat-actions">
+            <a class="btn-small" href="#especiais">VER ESPECIAIS</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE NÓS (também editável) -->
+  <section id="sobre" class="about">
+    <div class="wrap">
+      <h2>Sobre Nós</h2>
+
+      <div class="about-card">
+        <!-- EDITAR AQUI: imagem da secção Sobre -->
+        <div class="about-left">
+          <img src="PLACEHOLDER-SOBRE.jpg" alt="Sobre nós">
+        </div>
+
+        <!-- EDITAR AQUI: texto da secção Sobre -->
+        <div class="about-right">
+          <h3>Talho da Maria:</h3>
+          <p>
+            Desde 1975 a oferecer a melhor carne de origem local.
+            Comprometidos com a qualidade e o sabor autêntico que passa de geração em geração.
+          </p>
+          <div class="sig">— Maria Santos, Fundadora</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- (Opcional) Âncoras exemplo -->
+  <div id="bovino"></div>
+  <div id="suino"></div>
+  <div id="aves"></div>
+  <div id="especiais"></div>
+  <div id="receitas"></div>
+  <div id="contacto"></div>
+
+  <script>
+    /* =========================
+      CARROSSEL (JS)
+      - Editar tempo em autoMs
+      - Se adicionares/removeres slides, funciona automaticamente
+    ========================= */
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dotsWrap = document.getElementById('dots');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let idx = 0;
+    const autoMs = 5000; // EDITAR AQUI: tempo entre slides (ms)
+    let timer = null;
+
+    function renderDots(){
+      dotsWrap.innerHTML = '';
+      slides.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'dot' + (i === idx ? ' active' : '');
+        d.setAttribute('aria-label', 'Ir para slide ' + (i+1));
+        d.addEventListener('click', () => goTo(i, true));
+        dotsWrap.appendChild(d);
+      });
+    }
+
+    function show(){
+      slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+      const dots = Array.from(document.querySelectorAll('.dot'));
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+
+    function goTo(newIdx, userAction=false){
+      idx = (newIdx + slides.length) % slides.length;
+      show();
+      if(userAction) restart();
+    }
+
+    function next(userAction=false){ goTo(idx + 1, userAction); }
+    function prev(userAction=false){ goTo(idx - 1, userAction); }
+
+    function start(){
+      timer = setInterval(() => next(false), autoMs);
+    }
+    function stop(){
+      if(timer) clearInterval(timer);
+      timer = null;
+    }
+    function restart(){
+      stop();
+      start();
+    }
+
+    prevBtn.addEventListener('click', () => prev(true));
+    nextBtn.addEventListener('click', () => next(true));
+
+    // Iniciar
+    renderDots();
+    show();
+    start();
+
+    // Pausa quando o utilizador passa o rato por cima
+    const carousel = document.querySelector('.carousel');
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
+  </script>
+</body>
+</html>
